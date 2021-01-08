@@ -18,7 +18,7 @@ namespace TheQUIZ
         
 
       
-        public void AddScore(int s, List<int> l)
+        public void AddScore(int points, List<int> Score)
         {
             //....
         }

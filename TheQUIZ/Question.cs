@@ -10,29 +10,41 @@ namespace TheQUIZ
        public string QuestionDescription { get; set; }
         public string CorrectAnswer { get; set; }
         // List<string> CorrectAnswer { get; set; } = new List<string>(); // --- if we want Q with multiple correct A, should be a list too
-        List<string> AnswerOptions { get; set; } = new List<string>(); //--- list for all options
-       
-        public Question(string q, string ca, List<string> l)
+        // List<string> AnswerOptions { get; set; } = new List<string>(); //--- list for all options
+        string[] AnswerOptions { get; set; } = new string[4];
+        private string options = "ABCD";
+        public Question(string q, string ca, string[] a)
         {
             q = QuestionDescription;
             ca = CorrectAnswer;
-            l = AnswerOptions;
+            a = AnswerOptions;
         }
         public void PrintQnA()
         {
+
+            
             Console.WriteLine(QuestionDescription);
             Console.WriteLine();
-           
-            
-            // need to figure out how to output answer options from two lists randomly
+            for (int i = 0; i < AnswerOptions.Length; i++)
+            {
+                Console.WriteLine($"{options.Substring(i,1)}.{AnswerOptions[i]}");
+            }
         }
 
-        public bool isAnsweredCorrectly(string a)
+        public bool isAnsweredCorrectly(string playerInput)
         {
-            //handling player's answer to the method to compare if its correcct
-        
-            // Loop in a loop!!
-            return true;
+            bool isCorrect = false;
+            for (int i = 0; i < options.Length; i++)
+            {
+                if (playerInput == options.Substring(i,1) )
+                {
+                    if (AnswerOptions[i] == CorrectAnswer)
+                    {
+                        isCorrect = true; ;
+                    }
+                }
+            }
+            return isCorrect;
         }
 
     }

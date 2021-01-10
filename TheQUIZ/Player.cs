@@ -7,7 +7,7 @@ namespace TheQUIZ
     class Player
     {
         public string Name { get; set; }
-        public int Score { get; set; }   //mb should be a list of points? easier to handle
+        public int Score { get; set; }  
         
         
         public Player(string n) 
@@ -18,18 +18,20 @@ namespace TheQUIZ
         
 
       
-        public void AddScore(int points, List<int> Score)
+        public int AddScore()  // this works ok
         {
-            //....
+           return Score += 5;
         }
-        public void ViewScore(Player p, List<int> l)
+        public int ViewScore()   //this works ok
         {
-            //...
+            return Score;
         }
         public int CalculateTotalScore()
         {
-            // sum all points from the score list
+            //will need to add bonus points for fast answers
+            
             return 0;
+             
         }
     }
     

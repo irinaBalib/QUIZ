@@ -31,11 +31,11 @@ namespace TheQUIZ
                 playersCounter++;
             } while (Console.ReadLine() != "GO");
 
-            //  Console.Clear();
+             Console.Clear();
 
             foreach (Question q in ListOfQuestions)
             {
-                q.PrintQnA(); //   !!!  whyyy not printing?!
+                q.PrintQnA(); 
 
                 for (int y = 0; y < ListOfPlayers.Count; y++)
                 {
@@ -54,10 +54,11 @@ namespace TheQUIZ
                         Console.WriteLine($"Your current score: {p.ViewScore()}");
                     }
                 }
-               // Console.Clear();
+                Console.Clear();
             }
 
             //who won -  getting max Score and comparing each Player's score to it  ---   WORKS OK
+            //need a check for a tie
             
             List<int> listOfScores = new List<int> {};
             foreach (Player p in ListOfPlayers)
@@ -66,6 +67,7 @@ namespace TheQUIZ
             }
 
             int winnersScore = listOfScores.Max();
+            
             foreach (Player p in ListOfPlayers)
             {
                 if (p.Score == winnersScore)

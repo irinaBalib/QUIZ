@@ -9,26 +9,23 @@ namespace TheQUIZ
        
        public string QuestionDescription { get; set; }
         public string CorrectAnswer { get; set; }
-        // List<string> CorrectAnswer { get; set; } = new List<string>(); // --- if we want Q with multiple correct A, should be a list too
-        // List<string> AnswerOptions { get; set; } = new List<string>(); //--- list for all options
         string[] AnswerOptions { get; set; } = new string[4];
         private string options = "ABCD";
-        public Question(string q, string ca, string[] a)
+        public Question(string question, string correctA, string[] answerOpt)
         {
-            q = QuestionDescription;
-            ca = CorrectAnswer;
-            a = AnswerOptions;
+            QuestionDescription = question;
+            CorrectAnswer = correctA;
+            AnswerOptions = answerOpt;
         }
         public void PrintQnA()
         {
-
-            
             Console.WriteLine(QuestionDescription);
             Console.WriteLine();
             for (int i = 0; i < AnswerOptions.Length; i++)
             {
                 Console.WriteLine($"{options.Substring(i,1)}.{AnswerOptions[i]}");
             }
+            Console.WriteLine();
         }
 
         public bool isAnsweredCorrectly(string playerInput)

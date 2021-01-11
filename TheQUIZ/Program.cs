@@ -58,7 +58,7 @@ namespace TheQUIZ
             }
 
             //who won -  getting max Score and comparing each Player's score to it  ---   WORKS OK
-            //need a check for a tie
+            
             
             List<int> listOfScores = new List<int> {};
             foreach (Player p in ListOfPlayers)
@@ -67,15 +67,44 @@ namespace TheQUIZ
             }
 
             int winnersScore = listOfScores.Max();
-            
+            //checking if all have score 0
+            if (winnersScore == 0)                       
+            {
+                Console.WriteLine("No winner today. Keep learning!");
+                Console.ReadLine();
+                Environment.Exit(0);
+            }
+
+            List<Player> listOfWinners = new List<Player> { };   // checking who has top score and putting them into a list 
+
             foreach (Player p in ListOfPlayers)
             {
                 if (p.Score == winnersScore)
                 {
-                    Console.WriteLine($"{p.Name} is the winner!");
+                    listOfWinners.Add(p);
                 }
             }
 
+            // checking if we have a)1 winner  b)few winners  c) its a tie 
+            if (listOfWinners.Count == 1)
+            {
+                Console.WriteLine($"{listOfWinners[0].Name} is the winner!");
+            }
+            else if (listOfScores.Count == listOfWinners.Count)
+            {
+                Console.WriteLine($"It's a tie! You all got {winnersScore} points.");
+            }
+            else
+            {
+                Console.WriteLine("The winners are:");
+                foreach (Player p in listOfWinners)
+                {
+                    Console.WriteLine(p.Name);
+                }
+                Console.WriteLine($"They all got {winnersScore} points.");
+            }
+
+            // score bord: make a static(?) method that receives int score and draws a pic
         }
     }
 }

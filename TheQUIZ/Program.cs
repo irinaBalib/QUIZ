@@ -13,25 +13,16 @@ namespace TheQUIZ
             List<Question> ListOfQuestions = new List<Question>();
             List<Player> ListOfPlayers = new List<Player>();
 
+            #region AddingQuestions (3 commented out)
             ListOfQuestions.Add(new Question("Which of these data types is NOT exclusive to storing numbers?", "var", new string[4]{ "int", "var","double", "float"}));
             ListOfQuestions.Add(new Question("What is the equivalent for SQL data type bit?", "bool", new string[4] { "var", "get", "set", "bool" }));
-            //creating questions....
-
-            #region oldWayToAddPlayers
             /*
-            Console.WriteLine("Add Players to the game.");
-            int playersCounter = 1;
-            do     //creating Players    ----- WORKS OK
-            {
-                Console.Write($"Player's {playersCounter} name: ");
-                string playersName = Console.ReadLine();
-                ListOfPlayers.Add(new Player(playersName));
-                Console.WriteLine($"{playersName} added to the game.");
-                Console.WriteLine("Type '+' to add more players or 'GO' to start the game.");
-                playersCounter++;
-            } while (Console.ReadLine() != "GO");
+            ListOfQuestions.Add(new Question("In SQL, what does the number in brackets after varchar(32) stand for?", "32 is the maximum length of varchar", new string[4] { "32 is the int used by the varchar method", "32 is the value of varchar", "32 is the length of varchar", "32 is the maximum length of varchar" }));
+            ListOfQuestions.Add(new Question("Methods help developers reduce the __ of their code.", "size", new string[4] { "size", "speed", "errors", "all of the above" }));
+            ListOfQuestions.Add(new Question("Which keyboard shortcut lets you start debugging your code?", "F5", new string[4] { "F5", "F9", "F10", "F11" }));
             */
             #endregion
+
 
             Console.WriteLine("Welcome to C# QUIZ!");
             Console.Write("How many players will play?  ");
@@ -67,25 +58,29 @@ namespace TheQUIZ
 
             Console.WriteLine("RULES: You will have time to read the question, then each player will have 30sec to answer. \n" +
                 "Each correct answer gives 10 points. \n" +
-                "** Try to give your answer as quick as possible - saved time will be added to your score as a bonus!\n" +
-                "The game will begin in ... ");
+                "** Try to give your answer as quick as possible - saved time will be added to your score as a bonus!");
+            Thread.Sleep(5000);
             Console.WriteLine();
+            Console.WriteLine("The game will begin in ... ");
+            
+            
 
             #region Countdown
 
-            int centerCursor = Console.WindowWidth / 2;
-            int countdown = 5;
-            Console.SetCursorPosition(centerCursor, Console.CursorTop);
+            int countdown = 3;
+            Console.SetCursorPosition(30, Console.CursorTop-1);
             Console.Write(countdown);
             do
             {
                 Thread.Sleep(1000);
                 countdown--;
-                Console.SetCursorPosition(centerCursor, Console.CursorTop);
+                Console.SetCursorPosition(30, Console.CursorTop);
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.Write(countdown);
             } while (countdown > 0);
             #endregion
+
+           // Console.ReadLine();
 
             Console.Clear();
             Console.WriteLine();
@@ -212,6 +207,8 @@ namespace TheQUIZ
 
             Console.ResetColor();
             Console.WriteLine();
+
+            #region FinalResultsBoard
             Console.Write("Player");
             Console.SetCursorPosition(10, Console.CursorTop);
             Console.WriteLine("| Score");
@@ -226,7 +223,7 @@ namespace TheQUIZ
             }
 
         }
-        public static void PrintScoreBoard(List<Player> playersList)
+        public static void PrintScoreBoard(List<Player> playersList)  // replace visuals "|" with outputing score like in final board?
         {
             Console.WriteLine("ScoreBoard");
             Console.WriteLine();
@@ -244,6 +241,7 @@ namespace TheQUIZ
                 {
                     for (int i = 0; i <= scoreView-1; i++)
                     {
+                        Console.BackgroundColor = ConsoleColor.Yellow;
                         Console.Write("|");
                         Console.ResetColor();
                     }

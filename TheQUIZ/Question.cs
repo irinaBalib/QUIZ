@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading;
 
 namespace TheQUIZ
 {
@@ -20,6 +21,7 @@ namespace TheQUIZ
         public void PrintQnA()
         {
             Console.WriteLine(QuestionDescription);
+            Thread.Sleep(1000);
             Console.WriteLine();
             for (int i = 0; i < AnswerOptions.Length; i++)
             {
@@ -28,6 +30,18 @@ namespace TheQUIZ
             Console.WriteLine();
         }
 
+        public bool isAnsweredABCD(string playerInput)
+        {
+            bool isABCD = false;
+            for (int i = 0; i < options.Length; i++)
+            {
+                if (playerInput == options.Substring(i, 1))
+                {
+                        isABCD = true; 
+                }
+            }
+            return isABCD;
+        }
         public bool isAnsweredCorrectly(string playerInput)
         {
             bool isCorrect = false;

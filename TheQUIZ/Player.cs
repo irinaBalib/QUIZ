@@ -18,21 +18,22 @@ namespace TheQUIZ
         
 
       
-        public int AddScore()  // this works ok
+        public int AddScore(int secondsSpent)  
         {
-           return Score += 5;
+            int pointsPerQuestion = 10;
+            int timeLimit = 30;  // seconds
+            if (secondsSpent <= timeLimit)
+            {
+              Score = pointsPerQuestion + (timeLimit - secondsSpent);
+            }
+            return Score;
         }
         public int ViewScore()   //this works ok
         {
             return Score;
         }
-        public int CalculateTotalScore()
-        {
-            //will need to add bonus points for fast answers
-            
-            return 0;
-             
-        }
+        
+        
     }
     
 }

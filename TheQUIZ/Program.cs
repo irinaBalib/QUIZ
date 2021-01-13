@@ -13,7 +13,7 @@ namespace TheQUIZ
             List<Question> ListOfQuestions = new List<Question>();
             List<Player> ListOfPlayers = new List<Player>();
 
-            #region AddingQuestions (3 commented out)
+            #region AddingQuestions(3q commented out)
             ListOfQuestions.Add(new Question("Which of these data types is NOT exclusive to storing numbers?", "var", new string[4]{ "int", "var","double", "float"}));
             ListOfQuestions.Add(new Question("What is the equivalent for SQL data type bit?", "bool", new string[4] { "var", "get", "set", "bool" }));
             /*
@@ -221,7 +221,7 @@ namespace TheQUIZ
                 Console.WriteLine($"| {p.Score}");
                 Console.WriteLine("----------------------");
             }
-
+            #endregion
         }
         public static void PrintScoreBoard(List<Player> playersList)  // replace visuals "|" with outputing score like in final board?
         {

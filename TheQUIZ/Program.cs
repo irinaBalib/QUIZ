@@ -16,11 +16,11 @@ namespace TheQUIZ
             #region AddingQuestions(3q commented out)
             ListOfQuestions.Add(new Question("Which of these data types is NOT exclusive to storing numbers?", "var", new string[4]{ "int", "var","double", "float"}));
             ListOfQuestions.Add(new Question("What is the equivalent for SQL data type bit?", "bool", new string[4] { "var", "get", "set", "bool" }));
-            /*
+            
             ListOfQuestions.Add(new Question("In SQL, what does the number in brackets after varchar(32) stand for?", "32 is the maximum length of varchar", new string[4] { "32 is the int used by the varchar method", "32 is the value of varchar", "32 is the length of varchar", "32 is the maximum length of varchar" }));
             ListOfQuestions.Add(new Question("Methods help developers reduce the __ of their code.", "size", new string[4] { "size", "speed", "errors", "all of the above" }));
             ListOfQuestions.Add(new Question("Which keyboard shortcut lets you start debugging your code?", "F5", new string[4] { "F5", "F9", "F10", "F11" }));
-            */
+            
             #endregion
 
 
@@ -57,7 +57,7 @@ namespace TheQUIZ
             Console.WriteLine();
 
             Console.WriteLine("RULES: You will have time to read the question, then each player will have 30sec to answer. \n" +
-                "Each correct answer gives 10 points. \n" +
+                "Each correct answer gives +10 points. \n" +
                 "** Try to give your answer as quick as possible - saved time will be added to your score as a bonus!");
             Thread.Sleep(5000);
             Console.WriteLine();
@@ -105,10 +105,22 @@ namespace TheQUIZ
             foreach (Question q in ListOfQuestions)
             {
                 q.PrintQnA();
-                Thread.Sleep(4000);     // pause for Players to read the question and options
+                ConsoleKeyInfo cki;
+              
+               // Thread.Sleep(4000);     pause for Players to read the question and options
+                Console.WriteLine("*Press ENTER to take your turn\n" +
+                    "");
 
                 for (int y = 0; y < ListOfPlayers.Count; y++)
                 {
+                    
+                    #region switchingTurns by ENTER
+                    do
+                    { 
+                        cki = Console.ReadKey(true);
+                    } while (cki.Key != ConsoleKey.Enter);
+                    #endregion
+
                     Player p = ListOfPlayers[y];
                     Console.Write($"Player {y+1} {p.Name} answer: ");
 
@@ -132,18 +144,17 @@ namespace TheQUIZ
                     bool isCorrect = q.isAnsweredCorrectly(playerInput);
                     if (isCorrect)
                     {
-                        Console.Write("Correct! ");
-                        Console.WriteLine($"Your current score: {p.AddScore(time)}");
+                         p.AddScore(time);
                     }
-                    else
+                   /*else
                     {
                         Console.Write("False! ");
                         Console.WriteLine($"Your current score: {p.ViewScore()}");
-                    }
+                    }*/
                 }
                 Console.WriteLine();
                 Console.ForegroundColor = ConsoleColor.Green;
-                Console.WriteLine($"Correct answer is {q.CorrectAnswer}.");
+                Console.WriteLine($"Correct answer : {q.CorrectAnswer}.");
                 Console.ResetColor();
                 Console.WriteLine();
                 PrintScoreBoard(ListOfPlayers);
@@ -207,47 +218,26 @@ namespace TheQUIZ
 
             Console.ResetColor();
             Console.WriteLine();
-
-            #region FinalResultsBoard
-            Console.Write("Player");
-            Console.SetCursorPosition(10, Console.CursorTop);
-            Console.WriteLine("| Score");
-            Console.WriteLine("----------------------");
-
-            foreach (Player p in ListOfPlayers)
-            {
-                Console.Write($"{p.Name} ");
-                Console.SetCursorPosition(10, Console.CursorTop);
-                Console.WriteLine($"| {p.Score}");
-                Console.WriteLine("----------------------");
-            }
-            #endregion
+            PrintScoreBoard(ListOfPlayers);
+            
         }
-        public static void PrintScoreBoard(List<Player> playersList)  // replace visuals "|" with outputing score like in final board?
-        {
+        public static void PrintScoreBoard(List<Player> playersList) 
+        { 
             Console.WriteLine("ScoreBoard");
             Console.WriteLine();
             
+            Console.Write("Player# |   Name");
+            Console.SetCursorPosition(20, Console.CursorTop);
+            Console.WriteLine("| Score");
+            Console.WriteLine("---------------------------|");
+
             foreach (Player p in playersList)
             {
-                int scoreView = p.Score / 2;
-                
-                Console.Write($"Player {playersList.IndexOf(p)+1}  ");
-                if (scoreView == 0)
-                {
-                    Console.WriteLine();
-                }
-                else
-                {
-                    for (int i = 0; i <= scoreView-1; i++)
-                    {
-                        Console.BackgroundColor = ConsoleColor.Yellow;
-                        Console.Write("|");
-                        Console.ResetColor();
-                    }
-                    Console.WriteLine();
-                }
-                Console.WriteLine("------------------------------------------------------------------------");
+                Console.Write($"Player {playersList.IndexOf(p) + 1}|  ");
+                Console.Write($"{p.Name} ");
+                Console.SetCursorPosition(20, Console.CursorTop);
+                Console.WriteLine($"| {p.Score}");
+                Console.WriteLine("---------------------------|");
             }
         }
         public static void ClearPreviousLine()

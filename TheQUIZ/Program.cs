@@ -25,10 +25,10 @@ namespace TheQUIZ
 
 
             Console.WriteLine("Welcome to C# QUIZ!");
-            Console.Write("How many players will play?  ");
+            Console.Write("How many players will be playing?  ");
             int playerCount;
             bool isInputANumber= int.TryParse(Console.ReadLine(), out playerCount);
-            while (!isInputANumber)
+            while (!isInputANumber || playerCount == 0)
             {
                 ClearPreviousLine();
                 Console.Write("Invalid input! Please enter the number of players:  ");
@@ -67,7 +67,7 @@ namespace TheQUIZ
 
             #region Countdown
 
-            int countdown = 3;
+            int countdown = 5;
             Console.SetCursorPosition(30, Console.CursorTop-1);
             Console.Write(countdown);
             do
@@ -80,7 +80,7 @@ namespace TheQUIZ
             } while (countdown > 0);
             #endregion
 
-           // Console.ReadLine();
+            Console.ReadLine();
 
             Console.Clear();
             Console.WriteLine();
@@ -104,10 +104,10 @@ namespace TheQUIZ
 
             foreach (Question q in ListOfQuestions)
             {
+                Console.Write($"{(ListOfQuestions.IndexOf(q))+1}. ");
                 q.PrintQnA();
                 ConsoleKeyInfo cki;
               
-               // Thread.Sleep(4000);     pause for Players to read the question and options
                 Console.WriteLine("*Press ENTER to take your turn\n" +
                     "");
 
@@ -154,7 +154,7 @@ namespace TheQUIZ
                 }
                 Console.WriteLine();
                 Console.ForegroundColor = ConsoleColor.Green;
-                Console.WriteLine($"Correct answer : {q.CorrectAnswer}.");
+                Console.WriteLine($"Correct answer : {q.CorrectAnswer}");
                 Console.ResetColor();
                 Console.WriteLine();
                 PrintScoreBoard(ListOfPlayers);
@@ -164,8 +164,7 @@ namespace TheQUIZ
             }
 
             #region WhoWon
-            //  getting max Score and comparing each Player's score to it  ---   WORKS OK
-
+            Console.WriteLine();
 
             List<int> listOfScores = new List<int> {};
             foreach (Player p in ListOfPlayers)
@@ -182,6 +181,9 @@ namespace TheQUIZ
             if (winnersScore == 0)                       
             {
                 Console.WriteLine("No winner today. Keep learning!");
+                Console.ResetColor();
+                Console.WriteLine();
+                PrintScoreBoard(ListOfPlayers);
                 Console.ReadLine();
                 Environment.Exit(0);
             }

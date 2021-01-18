@@ -28,11 +28,12 @@ namespace TheQUIZ
             }
             return Score;
         }
-        public int ViewScore()   //this works ok
+
+      /*  public int ViewScore()   
         {
             return Score;
         }
-        
+        */
         
     }
     
